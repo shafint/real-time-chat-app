@@ -54,7 +54,6 @@ io.on("connection", (socket) => {
   socket.on("sendMessage", (msgData) => {
     const user = userIdStorage.find(users => users.userId == msgData.receiver.id);
     socket.to(user.socketId).emit("getMessage", msgData);
-    console.log(msgData)
   });
 
   socket.on("selfDisconnect",()=>{

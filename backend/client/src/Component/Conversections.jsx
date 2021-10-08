@@ -8,6 +8,7 @@ import Trash from "../image/trash.png";
 import attachment from "../image/attachment.png";
 import sent from "../image/sent.png";
 import ConversModel from "./ConversModel";
+import { Helmet } from "react-helmet";
 import Picker from "emoji-picker-react";
 import Contact from "./Contact";
 import { io } from "socket.io-client";
@@ -203,6 +204,11 @@ const Conversections = () => {
 
   return (
     <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title> SM-Chat-App</title>
+      <link rel="canonical" href="http://localhost:3000/conversection" />
+    </Helmet>
       <div className="conversections">
         <div className="container">
           <div className="">

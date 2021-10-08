@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./css/SignIn.css"
 import { Link } from "react-router-dom"
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom"
 const SignIn = () => {
   const [signUp, setSignUp] = useState({
@@ -61,6 +62,12 @@ const SignIn = () => {
 
   return (
     <div>
+      
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title> SM-Chat-App -SignIn  </title>
+      <link rel="canonical" href="http://localhost:3000/signin" />
+    </Helmet>
       <div className="signIn">
         <div className="container">
           <div className="row">

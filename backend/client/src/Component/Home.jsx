@@ -1,6 +1,7 @@
 import React,{useEffect} from "react";
 import "./css/Homestyle.css";
 import { Link,useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import homeImg from "../image/web_developer.gif";
 const Home = () => {
   const location=useHistory()
@@ -15,6 +16,11 @@ const Home = () => {
 
   return (
     <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title> SM-Chat-App - Home</title>
+      <link rel="canonical" href="http://localhost:3000/" />
+    </Helmet>
       <div className="home">
         <div className="container">
           <div className="row">
