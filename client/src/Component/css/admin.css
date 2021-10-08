@@ -1,0 +1,54 @@
+.parent_clsUsers{
+    height: 100vh;
+    background: rgb(21, 24, 26)
+}
+.list-user{
+    border: 1px solid rgb(71, 255, 47);
+    width: 60%;
+    margin: 0;
+    padding: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.list-user li{
+        width: 90%;
+        height: 40px;
+        
+    box-shadow: 0px 0px 2px 0px rgb(5 78 94);
+        margin: 10px 3px;
+}
+.img-user-list{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    object-fit: cover;
+    border:2px solid indianred
+}
+.text-li{
+    display: flex;
+    justify-content: center;
+
+}
+
+.text-li p{
+    margin: 0;
+    color: #fff;
+    font-size: 20px;
+    padding-left: 10px;
+}
+.dlt-btn-use{
+    border-radius: 10px !important;
+}
+.img-dlt-user{
+
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+}
+@media (max-width:770) {
+    .list-user{
+        border: 1px solid rgb(71, 255, 47);
+        width: 90%;
+    }
+}
