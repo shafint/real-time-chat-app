@@ -1,7 +1,10 @@
 require("dotenv").config({path:"./config.env"})
 const express=require("express");
 const app=express();
-const path=require("path")
+const http=require("http")
+const expressServer=http.createServer(app)
+const {Server}=require("socket.io");
+const io=new Server(expressServer)
 require("./db/database")
 
 
@@ -19,8 +22,51 @@ app.use("/user/api",userRouter)
 app.use("/conversation/api",conversationRouter)
 app.use("/message",messageRouter)
 app.use("/admin/api",adminMain)
-app.listen(process.env.PORT,(error)=>{
+expressServer.listen(process.env.PORT,(error)=>{
     console.log(`server si runngin and port number is ${error?error:process.env.PORT}`);
 })
 
 
+// socket server init
+
+
+let userIdStorage = [];
+
+
+function userHandeller(userId, socketId) {
+  !userIdStorage.some((value) => value.userId === userId) &&
+    userIdStorage.push({ userId, socketId });
+}
+
+
+function userRemove(socket){
+  userIdStorage=userIdStorage.filter(val=> val.socketId !== socket.id)
+}
+
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("addUser", (userId) => {
+    userHandeller(userId, socket.id);
+    io.emit("activeUsers", userIdStorage);
+  });
+  //messageSent
+  socket.on("sendMessage", (msgData) => {
+    const user = userIdStorage.find(users => users.userId == msgData.receiver.id);
+    socket.to(user.socketId).emit("getMessage", msgData);
+    console.log(msgData)
+  });
+
+  socket.on("selfDisconnect",()=>{
+    userRemove(socket)
+    io.emit("activeUsers", userIdStorage);
+    console.log("a user Disconnected");
+  })
+
+  //user Disconnections
+  socket.on("disconnect", () => {
+    console.log("a user Disconnected");
+    userRemove(socket)
+    io.emit("activeUsers", userIdStorage);
+  });
+});

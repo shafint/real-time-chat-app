@@ -96,7 +96,7 @@ const Conversections = () => {
       if (convData.data) {
         setConvars([...convData.data]);
       }
-      socket.current = io("ws://localhost:8000");
+      socket.current = io("/");
       socket.current?.emit("addUser", loginResult.data._id);
       socket.current?.on("activeUsers", (datas) => {
         setActiveUsers(datas);
